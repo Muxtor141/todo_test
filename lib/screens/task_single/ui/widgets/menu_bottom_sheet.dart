@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_todo/common/models/task.dart';
 import 'package:test_todo/common/widgets/popups/cupertino_dialog.dart';
+import 'package:test_todo/core/assets/colors.dart';
 import 'package:test_todo/screens/home/ui/bloc/active_tasks/active_tasks_bloc.dart';
 import 'package:test_todo/screens/home/ui/bloc/archived_tasks/archived_tasks_bloc.dart';
 import 'package:test_todo/screens/home/ui/bloc/completed_tasks/completed_tasks_bloc.dart';
@@ -30,7 +31,13 @@ class MenuBottomSheet extends StatelessWidget {
                 Navigator.popUntil(context, (route) => route.isFirst);
               });
             },
-            child: const Text('Complete task'),
+            child: Text(
+              'Complete task',
+              style: Theme.of(context).textTheme.headline4!.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
           ),
           CupertinoActionSheetAction(
             onPressed: () {
@@ -48,9 +55,13 @@ class MenuBottomSheet extends StatelessWidget {
                 Navigator.popUntil(context, (route) => route.isFirst);
               });
             },
-            child: const Text(
+            child: Text(
               'Delete',
-              style: TextStyle(color: Colors.red),
+              style: Theme.of(context).textTheme.headline1!.copyWith(
+                    fontSize: 18,
+                    color: red,
+                    fontWeight: FontWeight.w500,
+                  ),
             ),
           ),
         ],
@@ -59,7 +70,13 @@ class MenuBottomSheet extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text('Cancel'),
+          child: Text(
+            'Cancel',
+            style: Theme.of(context).textTheme.headline4!.copyWith(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+          ),
         ),
       );
 }

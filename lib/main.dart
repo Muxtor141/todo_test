@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_todo/core/storage/todo_box.dart';
+import 'package:test_todo/core/theme/theme.dart';
 import 'package:test_todo/screens/home/ui/bloc/active_tasks/active_tasks_bloc.dart';
 import 'package:test_todo/screens/home/ui/bloc/archived_tasks/archived_tasks_bloc.dart';
 import 'package:test_todo/screens/home/ui/bloc/completed_tasks/completed_tasks_bloc.dart';
@@ -24,14 +25,16 @@ class MyApp extends StatelessWidget {
         BlocProvider(
             create: (c) => ActiveTasksBloc()..add(ActiveTasksEvent.getTasks())),
         BlocProvider(
-            create: (c) => ArchivedTasksBloc()..add(ArchivedTasksEvent.getTasks())),
+            create: (c) =>
+                ArchivedTasksBloc()..add(ArchivedTasksEvent.getTasks())),
         BlocProvider(
-            create: (c) => CompletedTasksBloc()..add(CompletedTasksEvent.getTasks()))
+            create: (c) =>
+                CompletedTasksBloc()..add(CompletedTasksEvent.getTasks()))
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
-
-        home: HomeScreen(),
+        theme: AppTheme.theme(),
+        title: 'Todo',
+        home: const HomeScreen(),
       ),
     );
   }

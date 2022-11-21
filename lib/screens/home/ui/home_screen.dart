@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:test_todo/common/models/task.dart';
+import 'package:test_todo/core/assets/colors.dart';
 import 'package:test_todo/screens/home/ui/bloc/active_tasks/active_tasks_bloc.dart';
 import 'package:test_todo/screens/home/ui/bloc/archived_tasks/archived_tasks_bloc.dart';
 import 'package:test_todo/screens/home/ui/bloc/completed_tasks/completed_tasks_bloc.dart';
@@ -54,7 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
-            child: const Icon(CupertinoIcons.square_pencil),
+            backgroundColor: white,
+            child: const Icon(
+              CupertinoIcons.square_pencil,
+              color: primaryColor,
+            ),
             onPressed: () {
               Navigator.push(
                   context,
@@ -87,7 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 toolbarHeight: 0,
                 backgroundColor: Colors.white,
                 elevation: 0,
-                expandedHeight: 56,collapsedHeight: 0,
+                expandedHeight: 56,
+                collapsedHeight: 0,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
                     margin: EdgeInsets.only(
@@ -99,7 +105,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           width: 16,
                         ),
                         Expanded(
-                          child: CupertinoSearchTextField(focusNode: _focusNode,
+                          child: CupertinoSearchTextField(
+                            focusNode: _focusNode,
                             controller: _searchController,
                             onChanged: (text) {
                               if (selectedStatus == TaskStatus.active) {
@@ -135,14 +142,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ArchivedTasksEvent.getTasks(search: ''));
                               }
                             },
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 8),
-                              child: Text(
-                                'Cancel',
-                                style: TextStyle(
-                                    color: Colors.blue,
-                                    fontWeight: FontWeight.w500),
-                              ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: Text('Cancel',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline4!
+                                      .copyWith(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      )),
                             ),
                           ),
                         const SizedBox(

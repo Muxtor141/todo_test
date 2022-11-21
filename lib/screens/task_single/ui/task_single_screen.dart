@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:test_todo/common/models/task.dart';
+import 'package:test_todo/core/assets/colors.dart';
 import 'package:test_todo/screens/task_single/ui/widgets/menu_bottom_sheet.dart';
 import 'package:test_todo/utils/enum/single_status.dart';
 import 'package:test_todo/utils/enum/task_status.dart';
@@ -143,16 +144,15 @@ class _TaskSingleScreenState extends State<TaskSingleScreen> {
                         const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
-                        color: Colors.grey[100]),
+                        color: Colors.orange[50]),
                     child: Text(
                       date.isEmpty
                           ? 'dd/mm/yyy'
                           : safeDate(date, 'dd/MM/yy hh:mm'),
-                      style: TextStyle(
-                          color:
-                              date.isNotEmpty ? Colors.blue[200] : Colors.grey,
+                      style: Theme.of(context).textTheme.headline4!.copyWith(
                           fontSize: 14,
-                          decorationThickness: 0),
+                          fontWeight: FontWeight.w400,
+                          color: date.isEmpty ? warmerGrey : primaryColor),
                     ),
                   ),
                 ),
@@ -165,7 +165,10 @@ class _TaskSingleScreenState extends State<TaskSingleScreen> {
               decoration: const BoxDecoration(),
               placeholder: 'Title',
               maxLines: null,
-              style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+              style: Theme.of(context).textTheme.headline1!.copyWith(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                  ),
               controller: _titleController,
             ),
             const SizedBox(
@@ -175,7 +178,10 @@ class _TaskSingleScreenState extends State<TaskSingleScreen> {
               placeholder: 'description',
               decoration: const BoxDecoration(),
               maxLines: null,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+              style: Theme.of(context).textTheme.headline1!.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                  ),
               controller: _descController,
             ),
           ],

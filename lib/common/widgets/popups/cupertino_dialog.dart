@@ -12,7 +12,7 @@ showIosDialog(BuildContext context,
         return IosDialog(
             title: title,
             description: description,
-            onTapPositive: (){
+            onTapPositive: () {
               onTapPositive(dialogContext);
             },
             positiveButtonTitle: positiveButtonTitle);
@@ -36,8 +36,20 @@ class IosDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoAlertDialog(
-      title: Text(title),
-      content: Text(description),
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.headline1!.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
+      ),
+      content: Text(
+        description,
+        style: Theme.of(context).textTheme.headline1!.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+            ),
+      ),
       actions: [
         GestureDetector(
           onTap: () {
@@ -48,8 +60,10 @@ class IosDialog extends StatelessWidget {
               child: Center(
                   child: Text(
                 'Cancel',
-                style: TextStyle(
-                    fontSize: 14, color: Colors.blue, decorationThickness: 0),
+                style: Theme.of(context).textTheme.headline4!.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
               ))),
         ),
         GestureDetector(
@@ -59,8 +73,10 @@ class IosDialog extends StatelessWidget {
               child: Center(
                   child: Text(
                 positiveButtonTitle,
-                style: TextStyle(
-                    fontSize: 14, color: Colors.blue, decorationThickness: 0),
+                style: Theme.of(context).textTheme.headline4!.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
               ))),
         ),
       ],

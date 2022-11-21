@@ -10,9 +10,13 @@ String safeDate(String date, String pattern) {
   }
 }
 
-showBottomSnackBar(BuildContext context,{required String message}){
-  ScaffoldMessenger.of(context).showSnackBar(
-       SnackBar(
-          content:
-          Text(message)));
+showBottomSnackBar(BuildContext context, {required String message}) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+    message,
+    style: Theme.of(context).textTheme.headline1!.copyWith(
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+        ),
+  )));
 }

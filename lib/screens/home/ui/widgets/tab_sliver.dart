@@ -23,9 +23,9 @@ class MySliverTabBar extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      margin: EdgeInsets.only(top: 25),
+      margin: const EdgeInsets.only(top: 25),
       child: Row(
-        children: [
+        children:[
           Expanded(
             child: CupertinoSegmentedControl(
                 groupValue: taskStatus,
@@ -50,9 +50,8 @@ class MySliverTabBar extends SliverPersistentHeaderDelegate {
                   // });
 
                   if (status == TaskStatus.active) {
-                    context
-                        .read<ActiveTasksBloc>()
-                        .add(ActiveTasksEvent.getTasks(search: controller.text));
+                    context.read<ActiveTasksBloc>().add(
+                        ActiveTasksEvent.getTasks(search: controller.text));
                     pageController.animateToPage(0,
                         duration: Duration(milliseconds: animationDuration),
                         curve: Curves.fastLinearToSlowEaseIn);
@@ -80,10 +79,10 @@ class MySliverTabBar extends SliverPersistentHeaderDelegate {
   double get maxExtent => 53;
 
   @override
-  double get minExtent =>53;
+  double get minExtent => 53;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-  return true;
+    return true;
   }
 }

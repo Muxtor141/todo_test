@@ -105,13 +105,13 @@ class _TaskSingleViewScreenState extends State<TaskSingleViewScreen> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
                       color: Colors.grey[100]),
-                  child: Text(
-                    safeDate(widget.task.createdAt, 'dd/MM/yy hh:mm'),
-                    style:  TextStyle(
-                        color:widget.task.createdAt.isNotEmpty?Colors.blue[200]: Colors.grey,
-                        fontSize: 14,
-                        decorationThickness: 0),
-                  ),
+                  child: Text(safeDate(widget.task.createdAt, 'dd/MM/yy hh:mm'),
+                      style: Theme.of(context).textTheme.headline1!.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: widget.task.createdAt.isNotEmpty
+                              ? Colors.blue[200]
+                              : Colors.grey)),
                 ),
               ],
             ),
@@ -120,22 +120,20 @@ class _TaskSingleViewScreenState extends State<TaskSingleViewScreen> {
             ),
             Text(
               widget.task.title,
-              style: const TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                  decorationThickness: 0),
+              style: Theme.of(context).textTheme.headline1!.copyWith(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
             const SizedBox(
               height: 12,
             ),
             Text(
               widget.task.description,
-              style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.black,
-                  decorationThickness: 0),
+              style: Theme.of(context).textTheme.headline1!.copyWith(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
             )
           ],
         ),

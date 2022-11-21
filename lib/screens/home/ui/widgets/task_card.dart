@@ -19,7 +19,6 @@ class TaskCard extends StatelessWidget {
 
   const TaskCard(
       {required this.model,
-
       required this.onTapChild,
       required this.slideGroupTag,
       this.startSlidableAction,
@@ -29,7 +28,8 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Slidable(
-        groupTag: slideGroupTag,key: ValueKey(model.id),
+        groupTag: slideGroupTag,
+        key: ValueKey(model.id),
         startActionPane:
             startSlidableAction == null || startSlidableAction!.isEmpty
                 ? null
@@ -62,13 +62,24 @@ class TaskCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Expanded(child: Text(model.title)),
+                    Expanded(
+                        child: Text(
+                      model.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline1!
+                          .copyWith(fontSize: 14, fontWeight: FontWeight.w500),
+                    )),
                     const SizedBox(
                       width: 30,
                     ),
                     Text(
-                      safeDate(model.createdAt, 'dd/MM/yyyy hh:mm'),
+                      safeDate(model.createdAt, 'dd/MM/yyyy hh:mm',),
                       maxLines: 2,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline1!
+                          .copyWith(fontSize: 12, fontWeight: FontWeight.w400,color: Colors.blue),
                     ),
                     const SizedBox(
                       width: 8,
@@ -83,13 +94,17 @@ class TaskCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         model.description,
-                        maxLines: 2,overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(color: Colors.grey),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style:Theme.of(context)
+                            .textTheme
+                            .headline3!
+                            .copyWith(fontSize: 12, fontWeight: FontWeight.w400),
                       ),
                     ),
                   ],
                 ),
-               const SizedBox(
+                const SizedBox(
                   height: 10,
                 )
               ],
