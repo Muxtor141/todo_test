@@ -5,11 +5,13 @@ showIosDialog(BuildContext context,
     {required String title,
     required String description,
     required String positiveButtonTitle,
+    bool hasCancelButton = true,
     required Function(BuildContext context) onTapPositive}) {
   showDialog(
       context: context,
       builder: (dialogContext) {
         return IosDialog(
+            hasCancelButton: hasCancelButton,
             title: title,
             description: description,
             onTapPositive: () {
@@ -24,9 +26,11 @@ class IosDialog extends StatelessWidget {
   final String description;
   final String positiveButtonTitle;
   final VoidCallback onTapPositive;
+  final bool hasCancelButton;
 
   const IosDialog(
       {required this.title,
+      required this.hasCancelButton,
       required this.description,
       required this.onTapPositive,
       required this.positiveButtonTitle,
@@ -51,21 +55,22 @@ class IosDialog extends StatelessWidget {
             ),
       ),
       actions: [
-        GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: SizedBox(
-              height: 44,
-              child: Center(
-                  child: Text(
-                'Cancel',
-                style: Theme.of(context).textTheme.headline4!.copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-              ))),
-        ),
+        if (hasCancelButton)
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: SizedBox(
+                height: 44,
+                child: Center(
+                    child: Text(
+                  'Cancel',
+                  style: Theme.of(context).textTheme.headline4!.copyWith(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                ))),
+          ),
         GestureDetector(
           onTap: onTapPositive,
           child: Container(
@@ -74,7 +79,7 @@ class IosDialog extends StatelessWidget {
                   child: Text(
                 positiveButtonTitle,
                 style: Theme.of(context).textTheme.headline4!.copyWith(
-                      fontSize: 14,
+                      fontSize: 15,
                       fontWeight: FontWeight.w500,
                     ),
               ))),

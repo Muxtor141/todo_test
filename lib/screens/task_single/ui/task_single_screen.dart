@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:test_todo/common/models/task.dart';
+import 'package:test_todo/common/widgets/popups/cupertino_dialog.dart';
 import 'package:test_todo/core/assets/colors.dart';
 import 'package:test_todo/screens/task_single/ui/widgets/menu_bottom_sheet.dart';
 import 'package:test_todo/utils/enum/single_status.dart';
@@ -56,15 +57,29 @@ class _TaskSingleScreenState extends State<TaskSingleScreen> {
                       createdAt: date,
                       description: _descController.text));
                 } else {
-                  widget.action(widget.task ??
-                      TaskModel(
-                          title: _titleController.text,
-                          id: 0,
-                          description: _descController.text,
-                          status: TaskStatus.active.status,
-                          createdAt: DateTime.now().toString()));
+                  if (_titleController.text.isNotEmpty &&
+                      _descController.text.isNotEmpty &&
+                      date.isNotEmpty) {
+                    widget.action(widget.task ??
+                        TaskModel(
+                            title: _titleController.text,
+                            id: 0,
+                            description: _descController.text,
+                            status: TaskStatus.active.status,
+                            createdAt: DateTime.now().toString()));
+                    Navigator.pop(context);
+
+                  } else {
+                    showIosDialog(context,
+                        title: 'Create task',
+                        description:
+                            'Please fill all fields to create new task',
+                        positiveButtonTitle: 'Ok',
+                        hasCancelButton: false, onTapPositive: (dialogContext) {
+                      Navigator.pop(dialogContext);
+                    });
+                  }
                 }
-                Navigator.pop(context);
               },
               child: Text(
                 widget.isEdit ? 'Save' : 'Create',
