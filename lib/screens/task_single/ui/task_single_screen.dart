@@ -56,6 +56,7 @@ class _TaskSingleScreenState extends State<TaskSingleScreen> {
                       title: _titleController.text,
                       createdAt: date,
                       description: _descController.text));
+                  Navigator.pop(context);
                 } else {
                   if (_titleController.text.isNotEmpty &&
                       _descController.text.isNotEmpty &&
