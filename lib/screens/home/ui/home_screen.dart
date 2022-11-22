@@ -175,6 +175,27 @@ class _HomeScreenState extends State<HomeScreen> {
                       })),
             ],
             body: HomePages(
+              onPageChanged: (index) {
+                if (index == 0) {
+                  context.read<ActiveTasksBloc>().add(
+                      ActiveTasksEvent.getTasks(search: _searchController.text));
+                  setState(() {
+                    selectedStatus = TaskStatus.active;
+                  });
+                } else if (index == 1) {
+                  context.read<CompletedTasksBloc>().add(
+                      CompletedTasksEvent.getTasks(search: _searchController.text));
+                  setState(() {
+                    selectedStatus = TaskStatus.completed;
+                  });
+                } else {
+                  context.read<ArchivedTasksBloc>().add(
+                      ArchivedTasksEvent.getTasks(search: _searchController.text));
+                  setState(() {
+                    selectedStatus = TaskStatus.archived;
+                  });
+                }
+              },
               pageController: _pageController,
             ),
           ),
